@@ -1,0 +1,57 @@
+From d0a57e194853be03bc9d1a8eba70a5035825d02e Mon Sep 17 00:00:00 2001
+From: "Lad, Prabhakar" <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Date: Wed, 23 Oct 2019 20:13:48 +0100
+Subject: [PATCH 6/6] DTS: enable pcie-ep for rcar E3
+
+Signed-off-by: Lad, Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+---
+ arch/arm64/boot/dts/renesas/cat875.dtsi   |  4 ++++
+ arch/arm64/boot/dts/renesas/r8a774c0.dtsi | 17 +++++++++++++++++
+ 2 files changed, 21 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/renesas/cat875.dtsi b/arch/arm64/boot/dts/renesas/cat875.dtsi
+index aaefc3a..69509dc 100644
+--- a/arch/arm64/boot/dts/renesas/cat875.dtsi
++++ b/arch/arm64/boot/dts/renesas/cat875.dtsi
+@@ -43,6 +43,10 @@
+ };
+ 
+ &pciec0 {
++	status = "disabled";
++};
++
++&pciec0_ep {
+ 	status = "okay";
+ };
+ 
+diff --git a/arch/arm64/boot/dts/renesas/r8a774c0.dtsi b/arch/arm64/boot/dts/renesas/r8a774c0.dtsi
+index a1c2de9..1711abe 100644
+--- a/arch/arm64/boot/dts/renesas/r8a774c0.dtsi
++++ b/arch/arm64/boot/dts/renesas/r8a774c0.dtsi
+@@ -1696,6 +1696,23 @@
+ 			status = "disabled";
+ 		};
+ 
++		pciec0_ep: pcie_ep@fe000000 {
++			compatible = "renesas,pcie-ep-r8a774c0",
++				     "renesas,pcie-ep-rcar-gen3";
++			bus-range = <0x00 0xff>;
++			reg = <0 0xfe000000 0 0x80000>,
++			      <0x0 0xfe100000 0 0x100000>,
++			      <0x0 0xfe200000 0 0x200000>,
++			      <0x0 0x30000000 0 0x8000000>,
++			      <0x0 0x38000000 0 0x8000000>;
++			reg-names = "apb-base", "memory0", "memory1", "memory2", "memory3";
++			clocks = <&cpg CPG_MOD 319>;
++			clock-names = "pcie";
++			resets = <&cpg 319>;
++			power-domains = <&sysc R8A774C0_PD_ALWAYS_ON>;
++			status = "disabled";
++		};
++
+ 		vspb0: vsp@fe960000 {
+ 			compatible = "renesas,vsp2";
+ 			reg = <0 0xfe960000 0 0x8000>;
+-- 
+2.7.4
+

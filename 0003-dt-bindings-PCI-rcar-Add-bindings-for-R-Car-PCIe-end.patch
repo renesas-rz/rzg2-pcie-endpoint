@@ -1,0 +1,66 @@
+From 23a1e95d601c4c66a519460a1472483327f13aa8 Mon Sep 17 00:00:00 2001
+From: "Lad, Prabhakar" <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Date: Wed, 6 Nov 2019 19:36:07 +0000
+Subject: [PATCH 3/6] dt-bindings: PCI: rcar: Add bindings for R-Car PCIe
+ endpoint controller
+
+This patch adds the bindings for the R-Car PCIe endpoint driver.
+
+Signed-off-by: Lad, Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+---
+ .../devicetree/bindings/pci/rcar-pci-ep.txt        | 43 ++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/pci/rcar-pci-ep.txt
+
+diff --git a/Documentation/devicetree/bindings/pci/rcar-pci-ep.txt b/Documentation/devicetree/bindings/pci/rcar-pci-ep.txt
+new file mode 100644
+index 0000000..b8c8616
+--- /dev/null
++++ b/Documentation/devicetree/bindings/pci/rcar-pci-ep.txt
+@@ -0,0 +1,43 @@
++* Renesas R-Car PCIe Endpoint Controller DT description
++
++Required properties:
++	    "renesas,pcie-ep-r8a774c0" for the R8A774C0 SoC;
++	    "renesas,pcie-ep-rcar-gen3" for a generic R-Car Gen3 or
++				     RZ/G2 compatible device.
++
++	    When compatible with the generic version, nodes must list the
++	    SoC-specific version corresponding to the platform first
++	    followed by the generic version.
++
++- reg: Five register ranges as listed in the reg-names property
++- reg-names: Must include the following names
++	- "apb-base"
++	- "memory0"
++	- "memory1"
++	- "memory2"
++	- "memory3"
++- resets: Must contain phandles to PCIe-related reset lines exposed by IP block
++- clocks: from common clock binding: clock specifiers for the PCIe controller
++	 clock.
++- clock-names: from common clock binding: should be "pcie".
++
++Optional Property:
++- max-functions: Maximum number of functions that can be configured (default 1).
++
++Example:
++
++SoC-specific DT Entry:
++
++	pcie_ep: pcie_ep@fe000000 {
++		compatible = "renesas,pcie-r8a7791", "renesas,pcie-rcar-gen2";
++		reg = <0 0xfe000000 0 0x80000>,
++			<0x0 0xfe100000 0 0x100000>,
++			<0x0 0xfe200000 0 0x200000>,
++			<0x0 0x30000000 0 0x8000000>,
++			<0x0 0x38000000 0 0x8000000>;
++		reg-names = "apb-base", "memory0", "memory1", "memory2", "memory3";
++		clocks = <&cpg CPG_MOD 319>;
++		clock-names = "pcie";
++		power-domains = <&sysc R8A774C0_PD_ALWAYS_ON>;
++		resets = <&cpg 319>;
++	};
+-- 
+2.7.4
+

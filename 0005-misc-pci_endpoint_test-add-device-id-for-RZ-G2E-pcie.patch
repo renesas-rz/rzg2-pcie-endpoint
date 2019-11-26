@@ -1,0 +1,35 @@
+From daeedd2ee329c1488e4a98216a840c40ea75a6a5 Mon Sep 17 00:00:00 2001
+From: "Lad, Prabhakar" <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Date: Wed, 6 Nov 2019 19:36:09 +0000
+Subject: [PATCH 5/6] misc: pci_endpoint_test: add device-id for RZ/G2E pcie
+ controller
+
+Signed-off-by: Lad, Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+---
+ drivers/misc/pci_endpoint_test.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/misc/pci_endpoint_test.c b/drivers/misc/pci_endpoint_test.c
+index 6e208a0..3e879c7 100644
+--- a/drivers/misc/pci_endpoint_test.c
++++ b/drivers/misc/pci_endpoint_test.c
+@@ -66,6 +66,8 @@
+ 
+ #define PCI_DEVICE_ID_TI_AM654			0xb00c
+ 
++#define PCI_DEVICE_ID_RENESAS_RZG2E		0x002d
++
+ #define is_am654_pci_dev(pdev)		\
+ 		((pdev)->device == PCI_DEVICE_ID_TI_AM654)
+ 
+@@ -797,6 +799,7 @@ static const struct pci_device_id pci_endpoint_test_tbl[] = {
+ 	{ PCI_DEVICE(PCI_VENDOR_ID_TI, PCI_DEVICE_ID_TI_AM654),
+ 	  .driver_data = (kernel_ulong_t)&am654_data
+ 	},
++	{ PCI_DEVICE(PCI_VENDOR_ID_RENESAS, PCI_DEVICE_ID_RENESAS_RZG2E) },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(pci, pci_endpoint_test_tbl);
+-- 
+2.7.4
+
