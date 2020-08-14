@@ -1,0 +1,38 @@
+From 0aa5511a90d861a5fd54b981fe7622333e5ec696 Mon Sep 17 00:00:00 2001
+From: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Date: Thu, 27 Aug 2020 12:27:41 +0100
+Subject: [PATCH 8/9] misc: pci_endpoint_test: Add Device ID for RZ/G2H PCIe
+ controller
+
+Add Renesas R8A774E1 in pci_device_id table so that pci-epf-test
+can be used for testing PCIe EP on RZ/G2H.
+
+Signed-off-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+---
+ drivers/misc/pci_endpoint_test.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/misc/pci_endpoint_test.c b/drivers/misc/pci_endpoint_test.c
+index ba654f42dc10..ed7425bb073d 100644
+--- a/drivers/misc/pci_endpoint_test.c
++++ b/drivers/misc/pci_endpoint_test.c
+@@ -77,6 +77,7 @@
+ #define PCI_DEVICE_ID_RENESAS_R8A774A1		0x0028
+ #define PCI_DEVICE_ID_RENESAS_R8A774B1		0x002b
+ #define PCI_DEVICE_ID_RENESAS_R8A774C0		0x002d
++#define PCI_DEVICE_ID_RENESAS_R8A774E1		0x0025
+ 
+ static DEFINE_IDA(pci_endpoint_test_ida);
+ 
+@@ -955,6 +956,7 @@ static const struct pci_device_id pci_endpoint_test_tbl[] = {
+ 	{ PCI_DEVICE(PCI_VENDOR_ID_RENESAS, PCI_DEVICE_ID_RENESAS_R8A774A1),},
+ 	{ PCI_DEVICE(PCI_VENDOR_ID_RENESAS, PCI_DEVICE_ID_RENESAS_R8A774B1),},
+ 	{ PCI_DEVICE(PCI_VENDOR_ID_RENESAS, PCI_DEVICE_ID_RENESAS_R8A774C0),},
++	{ PCI_DEVICE(PCI_VENDOR_ID_RENESAS, PCI_DEVICE_ID_RENESAS_R8A774E1),},
+ 	{ PCI_DEVICE(PCI_VENDOR_ID_TI, PCI_DEVICE_ID_TI_J721E),
+ 	  .driver_data = (kernel_ulong_t)&j721e_data,
+ 	},
+-- 
+2.17.1
+
