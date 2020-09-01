@@ -1,0 +1,43 @@
+From e0b3cb15cfa26b56aa5330bc7bf271a74fb7c60c Mon Sep 17 00:00:00 2001
+From: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Date: Fri, 14 Aug 2020 18:30:33 +0100
+Subject: [PATCH 1/9] dt-bindings: pci: rcar-pci-ep: Document r8a774a1 and
+ r8a774b1
+
+Document the support for R-Car PCIe EP on R8A774A1 and R8A774B1 SoC
+devices.
+
+Also constify "renesas,rcar-gen3-pcie-ep" so that it can be used as
+fallback compatible string for R-Car Gen3 and RZ/G2 devices as the
+PCIe module is identical.
+
+Signed-off-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Reviewed-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+Reviewed-by: Rob Herring <robh@kernel.org>
+---
+ Documentation/devicetree/bindings/pci/rcar-pci-ep.yaml | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/Documentation/devicetree/bindings/pci/rcar-pci-ep.yaml b/Documentation/devicetree/bindings/pci/rcar-pci-ep.yaml
+index aa483c7f27fd..70c45f72ab20 100644
+--- a/Documentation/devicetree/bindings/pci/rcar-pci-ep.yaml
++++ b/Documentation/devicetree/bindings/pci/rcar-pci-ep.yaml
+@@ -14,8 +14,11 @@ maintainers:
+ properties:
+   compatible:
+     items:
+-      - const: renesas,r8a774c0-pcie-ep
+-      - const: renesas,rcar-gen3-pcie-ep
++      - enum:
++          - renesas,r8a774a1-pcie-ep     # RZ/G2M
++          - renesas,r8a774b1-pcie-ep     # RZ/G2N
++          - renesas,r8a774c0-pcie-ep     # RZ/G2E
++      - const: renesas,rcar-gen3-pcie-ep # R-Car Gen3 and RZ/G2
+ 
+   reg:
+     maxItems: 5
+-- 
+2.17.1
+
