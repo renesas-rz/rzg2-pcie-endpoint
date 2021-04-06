@@ -408,19 +408,19 @@ LEGACY IRQ:     OKAY
 
 ### Read Test
 ```
-$ pcitest -r 1024
+$ pcitest -r -s 102400
 READ ( 102400 bytes):           OKAY
 ```
 
 ### Write Test
 ```
-$ pcitest -w 1024
+$ pcitest -w -s 102400
 WRITE ( 102400 bytes):          OKAY
 ```
 
 ### Copy Test
 ```
-$ pcitest -c 1024
+$ pcitest -c -s 102400
 COPY ( 102400 bytes):           OKAY
 ```
 
